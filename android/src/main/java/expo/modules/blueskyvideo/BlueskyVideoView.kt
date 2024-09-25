@@ -45,6 +45,11 @@ class BlueskyVideoView(
         private set(value) {
             field = value
             this.playerView.useController = value
+            onFullscreenChange(
+                mapOf(
+                    "isFullscreen" to value
+                )
+            )
         }
 
     private var isPlaying: Boolean = false

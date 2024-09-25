@@ -109,6 +109,7 @@ class BlueskyVideoView(
     private val onMutedChange by EventDispatcher()
     private val onPlayerPress by EventDispatcher()
     private val onStatusChange by EventDispatcher()
+    private val onFullscreenChange by EventDispatcher()
     private val onTimeRemainingChange by EventDispatcher()
     private val onError by EventDispatcher()
 

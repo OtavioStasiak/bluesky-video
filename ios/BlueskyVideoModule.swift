@@ -36,7 +36,8 @@ public class BlueskyVideoModule: Module {
         "onMutedChange",
         "onStatusChange",
         "onTimeRemainingChange",
-        "onError"
+        "onError",
+        "onFullscreenChange"
       ])
 
       Prop("url") { (view: VideoView, prop: URL) in

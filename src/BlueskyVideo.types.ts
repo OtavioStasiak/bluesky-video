@@ -7,7 +7,7 @@ export type BlueskyVideoViewProps = {
   forceTakeover?: boolean
   accessibilityHint?: string
   accessibilityLabel?: string
-
+  onFullscreenChange?: (e: NativeSyntheticEvent<{isFullscreen: boolean}>) => void
   onActiveChange?: (e: NativeSyntheticEvent<{isActive: boolean}>) => void
   onLoadingChange?: (e: NativeSyntheticEvent<{isLoading: boolean}>) => void
   onMutedChange?: (e: NativeSyntheticEvent<{isMuted: boolean}>) => void

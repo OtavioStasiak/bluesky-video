@@ -48,6 +48,12 @@ class VideoView: ExpoView, AVPlayerViewControllerDelegate {
 
   private var isFullscreen: Bool = false {
     didSet {
+       if isFullscreen != oldValue {
+        self.onFullscreenChange([
+          "isFullscreen": isFullscreen
+        ])
+      }
+
       if isFullscreen {
         self.pViewController?.showsPlaybackControls = isFullscreen
         self.play()
@@ -75,6 +81,7 @@ class VideoView: ExpoView, AVPlayerViewControllerDelegate {
   private let onStatusChange = EventDispatcher()
   private let onTimeRemainingChange = EventDispatcher()
   private let onError = EventDispatcher()
+  private let onFullscreenChange = EventDispatcher()
 
   private var enteredFullScreenMuted = true
   private var ignoreAutoplay = false
@@ -262,20 +269,18 @@ class VideoView: ExpoView, AVPlayerViewControllerDelegate {
 
   // MARK: - AVPlayerViewControllerDelegate
 
-  func playerViewController(_ playerViewController: AVPlayerViewController,
-                            willEndFullScreenPresentationWithAnimationCoordinator coordinator: UIViewControllerTransitionCoordinator) {
-    coordinator.animate(alongsideTransition: nil) { context in
-      if context.isCancelled {
-        return
-      }
+func playerViewController(_ playerViewController: AVPlayerViewController,
+                          willEndFullScreenPresentationWithAnimationCoordinator coordinator: UIViewControllerTransitionCoordinator) {
+  coordinator.animate(alongsideTransition: nil) { context in
+    if context.isCancelled { return }
 
-      self.isFullscreen = false
-      if self.enteredFullScreenMuted {
-        self.mute()
-      }
-      self.play()
+    self.isFullscreen = false
+    if self.enteredFullScreenMuted {
+      self.mute()
     }
+    self.play()
   }
+}
 
   // MARK: - visibility
 
@@ -307,7 +312,7 @@ class VideoView: ExpoView, AVPlayerViewControllerDelegate {
     self.isPlaying = false
   }
 
-  func togglePlayback() {
+func togglePlayback() {
     if self.isPlaying {
       self.pause()
     } else {

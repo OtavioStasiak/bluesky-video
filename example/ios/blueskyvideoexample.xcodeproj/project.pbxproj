@@ -348,7 +348,7 @@
 					"-lc++",
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_DEBUG";
-				PRODUCT_BUNDLE_IDENTIFIER = expo.modules.haileyokblueskyvideo.example;
+				PRODUCT_BUNDLE_IDENTIFIER = expo.modules.blueskyvideo.example;
 				PRODUCT_NAME = blueskyvideoexample;
 				SWIFT_OBJC_BRIDGING_HEADER = "blueskyvideoexample/blueskyvideoexample-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -376,7 +376,7 @@
 					"-lc++",
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_RELEASE";
-				PRODUCT_BUNDLE_IDENTIFIER = expo.modules.haileyokblueskyvideo.example;
+				PRODUCT_BUNDLE_IDENTIFIER = expo.modules.blueskyvideo.example;
 				PRODUCT_NAME = blueskyvideoexample;
 				SWIFT_OBJC_BRIDGING_HEADER = "blueskyvideoexample/blueskyvideoexample-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;

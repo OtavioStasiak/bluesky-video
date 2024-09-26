@@ -13,14 +13,14 @@
     },
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "expo.modules.haileyokblueskyvideo.example"
+      "bundleIdentifier": "expo.modules.blueskyvideo.example"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "expo.modules.haileyokblueskyvideo.example"
+      "package": "expo.modules.blueskyvideo.example"
     },
     "web": {
       "favicon": "./assets/favicon.png"

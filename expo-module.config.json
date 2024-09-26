@@ -4,6 +4,6 @@
     "modules": ["BlueskyVideoModule"]
   },
   "android": {
-    "modules": ["expo.modules.haileyokblueskyvideo.BlueskyVideoModule"]
+    "modules": ["expo.modules.blueskyvideo.BlueskyVideoModule"]
   }
 }

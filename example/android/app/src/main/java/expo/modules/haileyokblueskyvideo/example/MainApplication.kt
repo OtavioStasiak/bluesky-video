@@ -1,4 +1,4 @@
-package expo.modules.haileyokblueskyvideo.example
+package expo.modules.blueskyvideo.example
 
 import android.app.Application
 import android.content.res.Configuration

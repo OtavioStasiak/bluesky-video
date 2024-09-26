@@ -1,6 +1,6 @@
 apply plugin: 'com.android.library'
 
-group = 'expo.modules.haileyokblueskyvideo'
+group = 'expo.modules.blueskyvideo'
 version = '0.1.0'
 
 def expoModulesCorePlugin = new File(project(":expo-modules-core").projectDir.absolutePath, "ExpoModulesCorePlugin.gradle")
@@ -32,7 +32,7 @@ if (useManagedAndroidSdkVersions) {
 }
 
 android {
-  namespace "expo.modules.haileyokblueskyvideo"
+  namespace "expo.modules.blueskyvideo"
   defaultConfig {
     versionCode 1
     versionName "0.1.0"
@@ -41,3 +41,23 @@ android {
     abortOnError false
   }
 }
+
+
+dependencies {
+    implementation 'androidx.appcompat:appcompat:1.7.0'
+
+    // Remember to keep this in sync with the version in `expo-audio`
+  def androidxMedia3Version = "1.4.0"
+  implementation "androidx.media3:media3-session:${androidxMedia3Version}"
+  implementation "androidx.media3:media3-exoplayer:${androidxMedia3Version}"
+  implementation "androidx.media3:media3-exoplayer-dash:${androidxMedia3Version}"
+  implementation "androidx.media3:media3-exoplayer-hls:${androidxMedia3Version}"
+  implementation "androidx.media3:media3-ui:${androidxMedia3Version}"
+  implementation "androidx.media3:media3-datasource-okhttp:${androidxMedia3Version}"
+
+  def fragment_version = "1.6.2"
+  implementation "androidx.fragment:fragment:$fragment_version"
+  implementation "androidx.fragment:fragment-ktx:$fragment_version"
+}
+
+

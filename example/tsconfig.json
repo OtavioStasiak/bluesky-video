@@ -1,0 +1,10 @@
+{
+  "extends": "expo/tsconfig.base",
+  "compilerOptions": {
+    "strict": true,
+    "paths": {
+      "@haileyok/bluesky-video": ["../src/index"],
+      "@haileyok/bluesky-video/*": ["../src/*"]
+    }
+  }
+}

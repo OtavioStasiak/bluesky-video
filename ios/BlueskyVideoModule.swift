@@ -1,43 +1,71 @@
 import ExpoModulesCore
 
 public class BlueskyVideoModule: Module {
-  // Each module class must implement the definition function. The definition consists of components
-  // that describes the module's functionality and behavior.
-  // See https://docs.expo.dev/modules/module-api for more details about available components.
+  private var wasPlayingPlayer: AVPlayer?
+
   public func definition() -> ModuleDefinition {
-    // Sets the name of the module that JavaScript code will use to refer to the module. Takes a string as an argument.
-    // Can be inferred from module's class name, but it's recommended to set it explicitly for clarity.
-    // The module will be accessible from `requireNativeModule('BlueskyVideo')` in JavaScript.
     Name("BlueskyVideo")
-
-    // Sets constant properties on the module. Can take a dictionary or a closure that returns a dictionary.
-    Constants([
-      "PI": Double.pi
-    ])
-
-    // Defines event names that the module can send to JavaScript.
-    Events("onChange")
-
-    // Defines a JavaScript synchronous function that runs the native code on the JavaScript thread.
-    Function("hello") {
-      return "Hello world! 👋"
+    
+    OnCreate {
+      AudioManagement.shared.setPlayingVideo(false)
     }
 
-    // Defines a JavaScript function that always returns a Promise and whose native code
-    // is by default dispatched on the different thread than the JavaScript runtime runs on.
-    AsyncFunction("setValueAsync") { (value: String) in
-      // Send an event to JavaScript.
-      self.sendEvent("onChange", [
-        "value": value
+    OnAppEntersForeground {
+      self.wasPlayingPlayer?.play()
+      self.wasPlayingPlayer = nil
+    }
+
+    OnAppEntersBackground {
+      PlayerManager.shared.allPlayers().forEach { player in
+        if player.isPlaying {
+          player.pause()
+          self.wasPlayingPlayer = player
+          return
+        }
+      }
+    }
+
+    AsyncFunction("updateActiveVideoViewAsync") {
+      ViewManager.shared.updateActiveView()
+    }
+
+    View(VideoView.self) {
+      Events([
+        "onActiveChange",
+        "onLoadingChange",
+        "onMutedChange",
+        "onStatusChange",
+        "onTimeRemainingChange",
+        "onError",
+        "onFullscreenChange"
       ])
-    }
 
-    // Enables the module to be used as a native view. Definition components that are accepted as part of the
-    // view definition: Prop, Events.
-    View(BlueskyVideoView.self) {
-      // Defines a setter for the `name` prop.
-      Prop("name") { (view: BlueskyVideoView, prop: String) in
-        print(prop)
+      Prop("url") { (view: VideoView, prop: URL) in
+        view.url = prop
+      }
+
+      Prop("autoplay") { (view: VideoView, prop: Bool) in
+        view.autoplay = prop
+      }
+
+      Prop("beginMuted") { (view: VideoView, prop: Bool) in
+        view.beginMuted = prop
+      }
+      
+      Prop("forceTakeover") { (view: VideoView, prop: Bool) in
+        view.forceTakeover = prop
+      }
+
+      AsyncFunction("togglePlayback") { (view: VideoView) in
+        view.togglePlayback()
+      }
+
+      AsyncFunction("toggleMuted") { (view: VideoView) in
+        view.toggleMuted()
+      }
+
+      AsyncFunction("enterFullscreen") { (view: VideoView) in
+        view.enterFullscreen()
       }
     }
   }

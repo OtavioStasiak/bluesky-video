@@ -48,6 +48,10 @@ public class BlueskyVideoModule: Module {
         view.autoplay = prop
       }
 
+      Prop("pauseOnCloseFullscreen") { (view: VideoView, prop: Bool) in
+        view.pauseOnCloseFullscreen = prop
+      }
+
       Prop("beginMuted") { (view: VideoView, prop: Bool) in
         view.beginMuted = prop
       }

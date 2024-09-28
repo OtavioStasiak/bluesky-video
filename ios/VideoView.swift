@@ -10,6 +10,7 @@ class VideoView: ExpoView, AVPlayerViewControllerDelegate {
   var autoplay: Bool = true
   var url: URL?
   var beginMuted = true
+  var pauseOnCloseFullscreen: Bool = false
 
   // controls
   private var isLoading: Bool = false {
@@ -59,6 +60,9 @@ class VideoView: ExpoView, AVPlayerViewControllerDelegate {
         self.play()
       } else {
         self.pViewController?.showsPlaybackControls = false
+        if pauseOnCloseFullscreen {
+          self.pause()
+        }
       }
     }
   }
